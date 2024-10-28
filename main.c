@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: carbon-m <carbon-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 12:54:10 by carbon-m          #+#    #+#             */
-/*   Updated: 2024/10/28 13:15:17 by carbon-m         ###   ########.fr       */
+/*   Created: 2024/10/08 16:21:58 by carbon-m          #+#    #+#             */
+/*   Updated: 2024/10/28 15:01:37 by carbon-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include <fcntl.h>
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+#include "get_next_line.h"
+#include <stdio.h>
 
-char	*get_next_line(int fd);
-char	*ft_strjoin_gnl(char *s1, char *s2);
-char	*ft_strchr(char *s, int c);
-char	*ft_calloc_gnl(size_t nmemb, size_t size);
-size_t	ft_strlen(char *s);
+int	main(void)
+{
+	int			fd;
+	static char	*line;
 
-#endif
+	fd = open("hola.txt", 0);
+	if (fd == 0)
+		return (0);
+	line = get_next_line(fd);
+	printf("\n");
+	while (line)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+		printf("\n");
+		free(line);
+	}
+	close(fd);
+	return (0);
+}
