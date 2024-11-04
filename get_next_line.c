@@ -58,8 +58,6 @@ char	*full_line(char *s_buffer)
 		line[j] = s_buffer[j];
 		++j;
 	}
-	if (s_buffer[i] == 0)
-		line[j] = 10;
 	return (line);
 }
 
